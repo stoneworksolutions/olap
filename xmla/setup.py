@@ -3,21 +3,22 @@
 from setuptools import setup
 from distutils.util import get_platform
 
-long_description = open("README.rst").read() + "\n\n" +  open("CHANGES.md").read() 
+long_description = open("README.rst").read() + "\n\n" +  open("CHANGES.rst").read() 
 
 install_requires=[
     'olap',
-    'suds',
-    'requests == 1.2.3'
+    'suds-jurko == 0.6',
+    'requests == 2.5.1',
+    'six == 1.9.0'
     ]
 
 extras_require = {
-    "kerberos": ["kerberos"],
+    "kerberos": ["kerberos-py23 == 1.1.1.0"],
     "s4u2p":["s4u2p"]
 }
 
 if get_platform().startswith('win'):
-    extras_require["sspi"] = ["kerberos-sspi"]
+    extras_require["sspi"] = ["kerberos-sspi == 0.2"]
     
 # hack, or test wont run on py2.7
 try:
@@ -28,12 +29,13 @@ except:
 
 setup(
     name='xmla',
-    version='0.7.2',
+    version='0.8.0',
     url="https://github.com/may-day/olap",
     license='Apache Software License 2.0',
     classifiers = [
         "License :: OSI Approved :: Apache Software License",
         "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 3",
         "Development Status :: 3 - Alpha",
         "Environment :: Web Environment",
         "Intended Audience :: Developers",
@@ -52,7 +54,8 @@ setup(
     tests_require = [
         'nose',
         'nose-testconfig',
-        'docutils'
+        'docutils',
+        'Pygments == 1.6'
     ],
 
     test_suite = 'nose.collector',
